@@ -249,6 +249,7 @@ the text for a window system cut and paste."
 (setq auto-save-file-name-transforms
       `((".*" "~/.emacs-autosave/" t)))
 
+; go get golang.org/x/tools/cmd/goimports
 (require 'go-mode-autoloads)
 (setq gofmt-command "/Users/mike/work/gopath/bin/goimports")
 (add-hook 'before-save-hook 'gofmt-before-save)
