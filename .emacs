@@ -5,6 +5,14 @@
 ;; You may delete these explanatory comments.
 (package-initialize)
 
+
+; Window resizing!
+; `C-x ^’ makes the current window taller (‘enlarge-window’)
+; `C-x }’ makes it wider (‘enlarge-window-horizontally’)
+; `C-x {’ makes it narrower (‘shrink-window-horizontally’)
+; repeat last command C-x z, and then z z z z z
+
+
 (cd (expand-file-name "~/"))
 
 (add-to-list 'load-path "~/emacs-lisp/")
