@@ -19,6 +19,8 @@
 
 (set-foreground-color "white")
 (set-background-color "black")
+(add-to-list 'default-frame-alist '(background-color . "black"))
+(add-to-list 'default-frame-alist '(foreground-color . "white"))
 (set-cursor-color "spring green")
 (set-face-background 'region "forest green")
 (set-face-background 'highlight "forest green")
@@ -131,6 +133,7 @@ the text for a window system cut and paste."
                 ("\\.l[hg]s$" . literate-haskell-mode))))
 
 (setq auto-mode-alist `(("\\.js\\'" . js-mode) ,@auto-mode-alist))
+(setq auto-mode-alist `(("\\.ts\\'" . js-mode) ,@auto-mode-alist))
 (setq auto-mode-alist `(("\\.es6\\'" . js-mode) ,@auto-mode-alist))
 (setq auto-mode-alist `(("\\.g\\'" . java-mode) ,@auto-mode-alist))
 (setq auto-mode-alist `(("\\.ml\\w?" . tuareg-mode) ,@auto-mode-alist))
@@ -143,6 +146,8 @@ the text for a window system cut and paste."
 (add-to-list 'interpreter-mode-alist '("perl5" . cperl-mode))
 (add-to-list 'interpreter-mode-alist '("miniperl" . cperl-mode))
 (add-to-list 'auto-mode-alist '("\\.jsx\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.ts\\'" . web-mode))
 
 (setq web-mode-content-types-alist
       '(("jsx"  . ".*\\.jsx\\'")))
@@ -256,17 +261,25 @@ the text for a window system cut and paste."
       `((".*" . "~/.emacs-autosave/")))
 (setq auto-save-file-name-transforms
       `((".*" "~/.emacs-autosave/" t)))
+(setq create-lockfiles nil)  ; .# files
 
 ; go get golang.org/x/tools/cmd/goimports
+(setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
 (require 'go-mode-autoloads)
-(setq gofmt-command "/Users/mike/work/gopath/bin/goimports")
+(setq gofmt-command "/Users/mike/work/gopath/bin/goimports.sh")
 (add-hook 'before-save-hook 'gofmt-before-save)
 
 (defun my-go-hook ()
   (c-toggle-hungry-state 1)
+  (setq tab-width 4)
   ; (local-set-key (read-kbd-macro "DEL") 'c-electric-delete)
   ; (local-set-key (read-kbd-macro "RET") 'newline-and-indent)
 )
 (add-hook 'go-mode-hook 'my-go-hook)
 
+(set-frame-font "JetBrains Mono" nil t)
+(setq ring-bell-function 'ignore)
 
+(require 'yaml-mode)
+(add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
+(add-to-list 'auto-mode-alist '("\\.yaml\\'" . yaml-mode))
